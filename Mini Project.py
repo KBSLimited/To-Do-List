@@ -1,8 +1,8 @@
 # Define global variables
 tasks = []
 
-# Function to display the menu
 def display_menu():
+    """Display the menu of the To-Do List App."""
     print("""
     Welcome to the To-Do List App!
     Menu:
@@ -14,48 +14,60 @@ def display_menu():
     6. Quit
     """)
 
-# Function to add a task
 def add_task():
-    title = input("Enter the task title: ")
-    tasks.append({"title": title, "status": "Incomplete"})
-    print("Task added successfully.")
-
-# Function to view tasks
-def view_tasks():
-    if not tasks:
-        print("No tasks.")
-    else:
-        print("Tasks:")
-        for index, task in enumerate(tasks, start=1):
-            print(f"{index}. {task['title']} - {task['status']}")
-    input("Press Enter to return to the main menu.")
-
-# Function to view organized tasks
-def view_organized_tasks():
-    if not tasks:
-        print("No tasks.")
-    else:
-        incomplete_tasks = [task for task in tasks if task["status"] == "Incomplete"]
-        complete_tasks = [task for task in tasks if task["status"] == "Complete"]
-        print("Organized Tasks:")
-        if incomplete_tasks:
-            print("Incomplete Tasks:")
-            for index, task in enumerate(incomplete_tasks, start=1):
-                print(f"{index}. {task['title']} - {task['status']}")
-        else:
-            print("No incomplete tasks.")
-        if complete_tasks:
-            print("Complete Tasks:")
-            for index, task in enumerate(complete_tasks, start=1):
-                print(f"{index}. {task['title']} - {task['status']}")
-        else:
-            print("No complete tasks.")
-    input("Press Enter to return to the main menu.")
-
-# Function to mark a task as complete
-def mark_complete():
-    view_tasks()
+    """Add a new task to the list."""
     try:
+        title = input("Enter the task title: ")
+        priority = input("Enter the priority (High/Medium/Low): ")
+        due_date = input("Enter the due date (YYYY-MM-DD): ")
+        tasks.append({"title": title, "status": "Incomplete", "priority": priority, "due_date": due_date})
+        print("Task added successfully.")
+    except Exception as e:
+        print(f"An error occurred while adding the task: {e}")
+
+def view_tasks():
+    """View all tasks with their details."""
+    try:
+        if not tasks:
+            print("No tasks.")
+        else:
+            print("Tasks:")
+            for index, task in enumerate(tasks, start=1):
+                status_color = "\033[92m" if task['status'] == "Complete" else "\033[91m"
+                print(f"{index}. {task['title']} - Priority: {task['priority']} - Due Date: {task['due_date']} - Status: {status_color}{task['status']}\033[0m")
+        input("Press Enter to return to the main menu.")
+    except Exception as e:
+        print(f"An error occurred while viewing tasks: {e}")
+
+def view_organized_tasks():
+    """View tasks organized by status."""
+    try:
+        if not tasks:
+            print("No tasks.")
+        else:
+            incomplete_tasks = [task for task in tasks if task["status"] == "Incomplete"]
+            complete_tasks = [task for task in tasks if task["status"] == "Complete"]
+            print("Organized Tasks:")
+            if incomplete_tasks:
+                print("Incomplete Tasks:")
+                for index, task in enumerate(incomplete_tasks, start=1):
+                    print(f"{index}. {task['title']} - Priority: {task['priority']} - Due Date: {task['due_date']} - Status: {task['status']}")
+            else:
+                print("No incomplete tasks.")
+            if complete_tasks:
+                print("Complete Tasks:")
+                for index, task in enumerate(complete_tasks, start=1):
+                    print(f"{index}. {task['title']} - Priority: {task['priority']} - Due Date: {task['due_date']} - Status: {task['status']}")
+            else:
+                print("No complete tasks.")
+        input("Press Enter to return to the main menu.")
+    except Exception as e:
+        print(f"An error occurred while viewing organized tasks: {e}")
+
+def mark_complete():
+    """Mark a task as complete."""
+    try:
+        view_tasks()
         index = int(input("Enter the index of the task to mark as complete: ")) - 1
         if 0 <= index < len(tasks):
             tasks[index]["status"] = "Complete"
@@ -64,12 +76,15 @@ def mark_complete():
             print("Invalid index.")
     except ValueError:
         print("Invalid input. Please enter a number.")
-    input("Press Enter to return to the main menu.")
+    except Exception as e:
+        print(f"An error occurred while marking task as complete: {e}")
+    finally:
+        input("Press Enter to return to the main menu.")
 
-# Function to delete a task
 def delete_task():
-    view_tasks()
+    """Delete a task from the list."""
     try:
+        view_tasks()
         index = int(input("Enter the index of the task to delete: ")) - 1
         if 0 <= index < len(tasks):
             del tasks[index]
@@ -78,14 +93,29 @@ def delete_task():
             print("Invalid index.")
     except ValueError:
         print("Invalid input. Please enter a number.")
-    input("Press Enter to return to the main menu.")
+    except Exception as e:
+        print(f"An error occurred while deleting task: {e}")
+    finally:
+        input("Press Enter to return to the main menu.")
 
-# Main function
-def main():
+def get_user_choice():
+    """Get user's choice from the menu."""
     while True:
-        display_menu()
         try:
             choice = int(input("Enter your choice: "))
+            if 1 <= choice <= 6:
+                return choice
+            else:
+                print("Invalid choice. Please enter a number from 1 to 6.")
+        except ValueError:
+            print("Invalid input. Please enter a number.")
+
+def main():
+    """Main function to run the To-Do List application."""
+    try:
+        while True:
+            display_menu()
+            choice = get_user_choice()
             if choice == 1:
                 add_task()
             elif choice == 2:
@@ -99,10 +129,8 @@ def main():
             elif choice == 6:
                 print("Goodbye!")
                 break
-            else:
-                print("Invalid choice. Please enter a number from 1 to 6.")
-        except ValueError:
-            print("Invalid input. Please enter a number.")
+    except Exception as e:
+        print(f"An unexpected error occurred: {e}")
 
 # Entry point of the program
 if __name__ == "__main__":
