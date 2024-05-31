@@ -1,39 +1,46 @@
 # To-Do-List
  Mini Project
 
-To-Do List Application
-Overview
-This To-Do List Application is designed to help users manage their tasks efficiently. It provides features such as adding tasks, viewing tasks, organizing tasks, marking tasks as complete, and deleting tasks.
+# To-Do List Application
 
-How to Run the Application
+This simple To-Do List application allows you to manage your tasks efficiently. You can add, view, organize, mark as complete, and delete tasks easily through a user-friendly menu interface.
+
+## Features
+
+- Add a task: Enter the title, priority, and due date of the task to add it to the list.
+- View tasks: Display all tasks along with their details such as title, priority, due date, and status.
+- View organized tasks: View tasks categorized as incomplete and complete separately.
+- Mark a task as complete: Mark a task as complete from the list of tasks.
+- Delete a task: Remove a task from the list.
+
+## How to Run
+
 To run the application, follow these steps:
 
-Clone the Repository: Clone this repository to your local machine using the following command:
+1. Clone the repository or download the source code files.
 
-bash
-Copy code
-git clone <repository_url>
-Navigate to the Directory: Change your current directory to the cloned repository directory:
+2. Navigate to the directory containing the source code files.
 
-bash
-Copy code
-cd <repository_directory>
-Run the Application: Run the application by executing the Python script todo.py:
+3. Make sure you have Python installed on your system.
 
-Copy code
-python todo.py
-Interact with the Application: Once the application is running, you'll be presented with a menu to perform various actions. Follow the prompts to add tasks, view tasks, mark tasks as complete, delete tasks, or quit the application.
+4. Open a terminal or command prompt in the directory.
 
-Features
-1. Add a Task
-Allows users to add a new task to the list.
-2. View Tasks
-Displays a list of all tasks with their titles and statuses (complete or incomplete).
-3. View Organized Tasks
-Provides an organized view of tasks, separating incomplete and complete tasks.
-4. Mark a Task as Complete
-Allows users to mark a task as complete.
-5. Delete a Task
-Enables users to delete a task from the list.
-6. Quit
-Exits the application.
+5. Run the following command to start the application:
+
+    ```bash
+    python todo_list.py
+    ```
+
+6. The application will display a menu with options to manage your tasks. Follow the on-screen instructions to perform actions.
+
+7. To exit the application, choose the "Quit" option from the menu.
+
+## Requirements
+
+- Python 3.x
+
+## Contributor
+
+- [DeAndre Johnson](https://github.com/KBSLimited)
+
+Feel free to contribute to this project by submitting bug reports, feature requests, or pull requests.
