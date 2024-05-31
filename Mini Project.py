@@ -10,8 +10,9 @@ def display_menu():
     2. View tasks
     3. View organized tasks
     4. Mark a task as complete
-    5. Delete a task
-    6. Quit
+    5. Mark a task as incomplete
+    6. Delete a task
+    7. Save and Quit
     """)
 
 def add_task():
@@ -51,13 +52,15 @@ def view_organized_tasks():
             if incomplete_tasks:
                 print("Incomplete Tasks:")
                 for index, task in enumerate(incomplete_tasks, start=1):
-                    print(f"{index}. {task['title']} - Priority: {task['priority']} - Due Date: {task['due_date']} - Status: {task['status']}")
+                    status_color = "\033[91m"  # Red color for incomplete tasks
+                    print(f"{index}. {task['title']} - Priority: {task['priority']} - Due Date: {task['due_date']} - Status: {status_color}{task['status']}\033[0m")
             else:
                 print("No incomplete tasks.")
             if complete_tasks:
                 print("Complete Tasks:")
                 for index, task in enumerate(complete_tasks, start=1):
-                    print(f"{index}. {task['title']} - Priority: {task['priority']} - Due Date: {task['due_date']} - Status: {task['status']}")
+                    status_color = "\033[92m"  # Green color for complete tasks
+                    print(f"{index}. {task['title']} - Priority: {task['priority']} - Due Date: {task['due_date']} - Status: {status_color}{task['status']}\033[0m")
             else:
                 print("No complete tasks.")
         input("Press Enter to return to the main menu.")
@@ -68,6 +71,9 @@ def mark_complete():
     """Mark a task as complete."""
     try:
         view_tasks()
+        if not tasks:
+            print("No tasks to mark as complete.")
+            return
         index = int(input("Enter the index of the task to mark as complete: ")) - 1
         if 0 <= index < len(tasks):
             tasks[index]["status"] = "Complete"
@@ -81,10 +87,33 @@ def mark_complete():
     finally:
         input("Press Enter to return to the main menu.")
 
+def mark_incomplete():
+    """Mark a task as incomplete."""
+    try:
+        view_tasks()
+        if not tasks:
+            print("No tasks to mark as incomplete.")
+            return
+        index = int(input("Enter the index of the task to mark as incomplete: ")) - 1
+        if 0 <= index < len(tasks):
+            tasks[index]["status"] = "Incomplete"
+            print("Task marked as incomplete.")
+        else:
+            print("Invalid index.")
+    except ValueError:
+        print("Invalid input. Please enter a number.")
+    except Exception as e:
+        print(f"An error occurred while marking task as incomplete: {e}")
+    finally:
+        input("Press Enter to return to the main menu.")
+
 def delete_task():
     """Delete a task from the list."""
     try:
         view_tasks()
+        if not tasks:
+            print("No tasks to delete.")
+            return
         index = int(input("Enter the index of the task to delete: ")) - 1
         if 0 <= index < len(tasks):
             del tasks[index]
@@ -98,15 +127,25 @@ def delete_task():
     finally:
         input("Press Enter to return to the main menu.")
 
+def save_tasks_to_file(filename):
+    """Save tasks to a file."""
+    try:
+        with open(filename, 'w') as file:
+            for task in tasks:
+                file.write(f"{task['title']},{task['status']},{task['priority']},{task['due_date']}\n")
+        print("Tasks saved successfully.")
+    except Exception as e:
+        print(f"An error occurred while saving tasks to file: {e}")
+
 def get_user_choice():
     """Get user's choice from the menu."""
     while True:
         try:
             choice = int(input("Enter your choice: "))
-            if 1 <= choice <= 6:
+            if 1 <= choice <= 7:
                 return choice
             else:
-                print("Invalid choice. Please enter a number from 1 to 6.")
+                print("Invalid choice. Please enter a number from 1 to 7.")
         except ValueError:
             print("Invalid input. Please enter a number.")
 
@@ -125,9 +164,12 @@ def main():
             elif choice == 4:
                 mark_complete()
             elif choice == 5:
-                delete_task()
+                mark_incomplete()
             elif choice == 6:
-                print("Goodbye!")
+                delete_task()
+            elif choice == 7:
+                save_tasks_to_file("tasks.txt")  # Save tasks to file before quitting
+                print("Tasks saved. Goodbye!")
                 break
     except Exception as e:
         print(f"An unexpected error occurred: {e}")
