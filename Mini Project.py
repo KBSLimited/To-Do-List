@@ -28,6 +28,7 @@ def view_tasks():
         print("Tasks:")
         for index, task in enumerate(tasks, start=1):
             print(f"{index}. {task['title']} - {task['status']}")
+    input("Press Enter to return to the main menu.")
 
 # Function to view organized tasks
 def view_organized_tasks():
@@ -49,6 +50,7 @@ def view_organized_tasks():
                 print(f"{index}. {task['title']} - {task['status']}")
         else:
             print("No complete tasks.")
+    input("Press Enter to return to the main menu.")
 
 # Function to mark a task as complete
 def mark_complete():
@@ -62,6 +64,7 @@ def mark_complete():
             print("Invalid index.")
     except ValueError:
         print("Invalid input. Please enter a number.")
+    input("Press Enter to return to the main menu.")
 
 # Function to delete a task
 def delete_task():
@@ -75,11 +78,12 @@ def delete_task():
             print("Invalid index.")
     except ValueError:
         print("Invalid input. Please enter a number.")
+    input("Press Enter to return to the main menu.")
 
 # Main function
 def main():
-    display_menu()
     while True:
+        display_menu()
         try:
             choice = int(input("Enter your choice: "))
             if choice == 1:
