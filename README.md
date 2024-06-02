@@ -21,9 +21,9 @@
 todo_list.py
 
 ## Usage
-Upon launching the application, a menu will be displayed with options to perform various tasks.
-Follow the prompts to add, view, organize, mark, or delete tasks.
-To save tasks and exit the application, choose option 7 from the menu.
+- Upon launching the application, a menu will be displayed with options to perform various tasks.
+- Follow the prompts to add, view, organize, mark, or delete tasks.
+- To save tasks and exit the application, choose option 7 from the menu.
 
 ## File Structure
 - todo_list.py: Contains the main code for the To-Do List CLI application.
