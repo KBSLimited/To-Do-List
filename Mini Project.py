@@ -41,29 +41,30 @@ class TodoListCLI:
         except Exception as e:
             print(f"An error occurred while viewing tasks: {e}")
 
+    def _print_task_list(self, tasks, status_color):
+        """Print tasks based on their status."""
+        for index, task in enumerate(tasks, start=1):
+            print(f"{index}. {task['title']} - Priority: {task['priority']} - Due Date: {task['due_date']} - Status: {status_color}{task['status']}\033[0m")
+
     def view_organized_tasks(self):
         """View tasks organized by status."""
         try:
             if not self.tasks:
                 print("No tasks.")
+                return
+            incomplete_tasks = [task for task in self.tasks if task["status"] == "Incomplete"]
+            complete_tasks = [task for task in self.tasks if task["status"] == "Complete"]
+            print("Organized Tasks:")
+            if incomplete_tasks:
+                print("Incomplete Tasks:")
+                self._print_task_list(incomplete_tasks, "\033[91m")
             else:
-                incomplete_tasks = [task for task in self.tasks if task["status"] == "Incomplete"]
-                complete_tasks = [task for task in self.tasks if task["status"] == "Complete"]
-                print("Organized Tasks:")
-                if incomplete_tasks:
-                    print("Incomplete Tasks:")
-                    for index, task in enumerate(incomplete_tasks, start=1):
-                        status_color = "\033[91m"  # Red color for incomplete tasks
-                        print(f"{index}. {task['title']} - Priority: {task['priority']} - Due Date: {task['due_date']} - Status: {status_color}{task['status']}\033[0m")
-                else:
-                    print("No incomplete tasks.")
-                if complete_tasks:
-                    print("Complete Tasks:")
-                    for index, task in enumerate(complete_tasks, start=1):
-                        status_color = "\033[92m"  # Green color for complete tasks
-                        print(f"{index}. {task['title']} - Priority: {task['priority']} - Due Date: {task['due_date']} - Status: {status_color}{task['status']}\033[0m")
-                else:
-                    print("No complete tasks.")
+                print("No incomplete tasks.")
+            if complete_tasks:
+                print("Complete Tasks:")
+                self._print_task_list(complete_tasks, "\033[92m")
+            else:
+                print("No complete tasks.")
             input("Press Enter to return to the main menu.")
         except Exception as e:
             print(f"An error occurred while viewing organized tasks: {e}")
