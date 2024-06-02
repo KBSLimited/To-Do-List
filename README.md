@@ -1,8 +1,8 @@
 # To-Do-List
- Mini Project
+- Mini-Project
 
 ## To-Do List Application
-This simple To-Do List application allows you to manage your tasks efficiently. You can add, view, organize, mark as complete, and delete tasks easily through a user-friendly menu interface.
+- This simple To-Do List application allows you to manage your tasks efficiently. You can add, view, organize, mark as complete, and    delete tasks easily through a user-friendly menu interface.
 
 ## Features
 - Add a task: Enter the title, priority, and due date of the task to add it to the list.
@@ -10,23 +10,32 @@ This simple To-Do List application allows you to manage your tasks efficiently. 
 - View organized tasks: View tasks categorized as incomplete and complete separately.
 - Mark a task as complete: Mark a task as complete from the list of tasks.
 - Delete a task: Remove a task from the list.
-- How to Run
+- Save and Quit: Save all tasks to a file and exit the application.
 
-## To run the application, follow these steps:
+## Getting Started
+- Ensure you have Python installed on your system.
+- Clone or download the project repository.
+- Navigate to the project directory in your terminal.
+- Run the application by executing the following command:
 
-1. Clone the repository or download the source code files.
+todo_list.py
 
-2. Navigate to the directory containing the source code files.
+## Usage
+Upon launching the application, a menu will be displayed with options to perform various tasks.
+Follow the prompts to add, view, organize, mark, or delete tasks.
+To save tasks and exit the application, choose option 7 from the menu.
 
-3. Make sure you have Python installed on your system.
+## File Structure
+- todo_list.py: Contains the main code for the To-Do List CLI application.
+- tasks.txt: The file where tasks are saved upon choosing the "Save and Quit" option.
 
-4. Open a terminal or command prompt in the directory.
+## Dependencies
+- No external dependencies are required to run this application.
 
-5. Run the following command to start the application:
+## Notes
+- Tasks are stored in memory during the session and are saved to the tasks.txt file upon choosing the "Save and Quit" option. Make sure to save your tasks before exiting the application.
+- Date format for due dates: YYYY-MM-DD.
 
-    ```bash
-    python todo_list.py
-    ```
 ## Requirements
 - Python 3.x
 
